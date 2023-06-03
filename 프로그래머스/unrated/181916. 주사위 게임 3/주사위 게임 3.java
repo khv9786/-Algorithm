@@ -14,7 +14,7 @@ class Solution {
         } else if (dice[0] == dice[1] && dice[2] == dice[3]) { // 둘둘 같을 때
             return (dice[0] + dice[3]) * Math.abs(dice[3] - dice[0]);
             
-        } else if (dice[0] == dice[1]) { // 둘 하나하 경우
+        } else if (dice[0] == dice[1]) { // 둘 하나하나 경우
             return dice[2] * dice[3];
             
         } else if (dice[1] == dice[2]) {
