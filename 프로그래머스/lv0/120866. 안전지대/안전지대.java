@@ -18,6 +18,7 @@ class Solution {
                     }
 
                     if (nx >= 0 && nx < n && ny >= 0 && ny < n && board[nx][ny] == 1) {
+                        // 테두리 범위 설정
                         cnt[i][j] = true;
                     }
                 }
