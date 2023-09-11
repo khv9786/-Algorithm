@@ -4,9 +4,6 @@ class Solution {
         int cnt = my_string.length();
         for(int i = c-1; i<cnt; i += m){
             answer += my_string.charAt(i);
-            if(i + m > cnt){
-                break;
-            }
         }
         
         return answer;
