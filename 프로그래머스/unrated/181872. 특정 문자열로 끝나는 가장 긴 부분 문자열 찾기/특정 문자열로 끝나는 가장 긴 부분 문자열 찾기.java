@@ -1,19 +1,18 @@
 class Solution {
     public String solution(String myString, String pat) {
         String answer = "";
-        int idx = -1; // Initialize idx with -1 to indicate no match found
+        int idx = -1; 
         
         for (int i = myString.length() - 1; i >= pat.length() - 1; i--) {
             String s = "";
-            
-            // Build the string s by iterating from i to i - pat.length() + 1
+
             for (int j = i; j >= i - pat.length() + 1; j--) {
-                s = myString.charAt(j) + s; // Add characters in reverse order
+                s = myString.charAt(j) + s; 
             }
             
             if (pat.equals(s)) {
                 idx = i;
-                break; // Exit the loop if a match is found
+                break; 
             }
         }
         
