@@ -14,7 +14,8 @@ public class Main { //  26069번 붙임성
 			String A = sc.next();
 			String B = sc.next();
 			
-			//logic
+			//logic 
+			//A나 B가 춤추면 상대방을 Hash에 추가.
 			if(Danced.contains(A)) {
 				Danced.add(B);
 			}else if(Danced.contains(B)) {
@@ -22,7 +23,7 @@ public class Main { //  26069번 붙임성
 			}
 		}
 		
-		int answer = Danced.size();
+		int answer = Danced.size(); // 해시에 담긴 수 = 춤추는 사람
 		// output
 		System.out.println(answer);
 	}
