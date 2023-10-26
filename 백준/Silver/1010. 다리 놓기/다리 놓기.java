@@ -19,12 +19,12 @@ public class Main { //  1010번 다리 놓기
 			//r이 1인경우와 n과 m이같은 경우. 무조건 1
 			for(int i = 1; i<31; i++) {
 				dp[i][1] = i;
-				for(int j = 2; j<31; j++) {
-					if(i == j ) {
-						dp[i][j] = 1;
-					}
-				}
-			}
+//				for(int j = 2; j<31; j++) {
+//					if(i == j ) {
+//						dp[i][j] = 1;
+//					}
+//				}
+			} //넣으면 308ms
 			for(int i = 2; i<31; i++) { // 2부터 진행해야함.
 				for(int j = 2; j<31; j++) {				
 					dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];					
