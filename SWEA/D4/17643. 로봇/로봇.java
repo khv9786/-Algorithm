@@ -1,12 +1,8 @@
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 class Solution // Sweat 17643. 로봇 D4
 {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args)  {
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
 		long tmp = 1;
