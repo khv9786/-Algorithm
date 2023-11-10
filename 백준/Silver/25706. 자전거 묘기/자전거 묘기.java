@@ -1,16 +1,20 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
+    public static void main(String[] args)throws IOException  {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
         int arr[] = new int[N + 1];
         int[] dp = new int[N + 1];
-
-        for (int i = 1; i <= N; i++) {
-            arr[i] = sc.nextInt();
-        }
         dp[N] = 1;
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
         for (int i = N - 1; i > 0; i--) {
             if (arr[i] != 0) {
                 int temp = i + arr[i] + 1;
@@ -20,8 +24,11 @@ public class Main {
             }
         }
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= N; i++) {
-            System.out.print((i == N) ? dp[i] : dp[i] + " ");
+            sb.append((i == N) ? dp[i] : dp[i] + " ");
         }
+
+        System.out.println(sb.toString());
     }
 }
