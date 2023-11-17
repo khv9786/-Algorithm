@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution { // 1244. [S/W 문제해결 응용] 2일차 - 최대 상금
+class Solution { // 6019. 기차 사이의 파리 D3
 
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
