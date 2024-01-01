@@ -37,7 +37,6 @@ class Solution {
                 }
             }
             
-            Arrays.sort(answer);
             sb.append("#" + Tc + " ");
             for (Long a : answer) {
                 sb.append(a + " ");
