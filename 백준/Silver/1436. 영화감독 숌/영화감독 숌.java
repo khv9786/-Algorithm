@@ -1,44 +1,22 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) {
-        // Input
-        Scanner sc = new Scanner(System.in);
-        int N =sc.nextInt();
+public class Main { // Boj_1436_영화감독 숌
+	public static int N = 10;
+	public static String s;
 
-        int temp = 666;
-        int answer = 1;
-        // Logic 
-        
-        
-        while(answer != N) {
-			temp++;
-			if(String.valueOf(temp).contains("666")) {
-				answer++;
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		int answer = 666;
+		int chk = 1;		
+		while(chk != N) {
+			answer += 1;
+			s = String.valueOf(answer);
+			if(s.contains("666")){
+				chk += 1;
 			}
 		}
-		System.out.println(temp);
-               
-        sc.close();
-    }
+		System.out.println(answer);
+	}
 }
-// 앞에 숫자 추가 또는 후미에 추가는 귀찮네오..
-//666
-//1666
-//~
-//9666
-//10666
-//11666
-//12
-//13
-//14
-//15666
-//16661
-//~~~9
-//17666
-//18666
-//19666
-//20666
-//~~~~
-//25666
-//26661
