@@ -15,39 +15,33 @@ class Main { // Boj_9372_상근이의 여행_S4
             st = new StringTokenizer(br.readLine());
             N = Integer.parseInt(st.nextToken());
             M = Integer.parseInt(st.nextToken());
-            map = new boolean[N+1][N+1];
-            visit = new boolean[N+1];
+            map = new boolean[N + 1][N + 1];
+            visit = new boolean[N + 1];
             // input -------------------------------
             for (int i = 0; i < M; i++) {
                 st = new StringTokenizer(br.readLine());
                 int start = Integer.parseInt(st.nextToken());
                 int end = Integer.parseInt(st.nextToken());
-                    map[start][end] = true;
-                    map[end][start] = true;
             }
             // -------------------------------------
-            answer =0;
-                bfs(1);
 
-
-            System.out.println(answer-1);
-        }
-    }
-
-
-
-    public static void bfs(int start) {
-        Queue<Integer> que = new LinkedList<>();
-        que.add(start);
-        while(!que.isEmpty()) {
-            int now = que.poll();
-            for(int i = 1; i<= N; i++){
-                if(map[now][i] == true && now != i && !visit[i]){
-                    que.add(i);
-                    visit[i] = true;
-                    answer++;
-                }
-            }
+            System.out.println(N - 1);
         }
     }
 }
+
+//    public static void bfs(int start) {
+//        Queue<Integer> que = new LinkedList<>();
+//        que.add(start);
+//        while(!que.isEmpty()) {
+//            int now = que.poll();
+//            for(int i = 1; i<= N; i++){
+//                if(map[now][i] == true && now != i && !visit[i]){
+//                    que.add(i);
+//                    visit[i] = true;
+//                    answer++;
+//                }
+//            }
+//        }
+//    }
+//}
