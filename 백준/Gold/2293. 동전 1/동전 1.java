@@ -22,7 +22,7 @@ public class Main { // Boj_2293_동전 1
         for (int i=1; i<=n; i++) {
             coin[i] = Integer.parseInt(br.readLine());
         }
-        Arrays.sort(coin);
+//        Arrays.sort(coin);
         dp[0] = 1;
         for(int i = 1; i<=n; i++){
             for(int j = coin[i]; j<=k; j++ ){
