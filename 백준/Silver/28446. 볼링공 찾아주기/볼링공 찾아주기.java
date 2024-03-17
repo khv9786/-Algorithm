@@ -1,29 +1,32 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Main {
+public class Main { // Boj_28446_볼링공 찾아주기
+    public static int M; // 동굴 길이, 높이
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
 
-        int M = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        HashMap<Integer, Integer> bowl = new HashMap<>();
 
-        HashMap<Integer, Integer> locker = new HashMap<>();
-        for(int i=0; i<M; i++) {
-            StringTokenizer tk = new StringTokenizer(br.readLine(), " ");
-            int command = Integer.parseInt(tk.nextToken());
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int command = Integer.parseInt(st.nextToken());
 
-            if(command == 1) {
-                int index = Integer.parseInt(tk.nextToken());
-                int w = Integer.parseInt(tk.nextToken());
-                locker.put(w, index);
-            } else {
-                int w = Integer.parseInt(tk.nextToken());
-                bw.write(locker.get(w) + "\n");
+            if (command == 1) {
+                int x = Integer.parseInt(st.nextToken());
+                int w = Integer.parseInt(st.nextToken());
+                bowl.put(w, x);
+
+            } else if (command == 2) {
+                int w = Integer.parseInt(st.nextToken());
+                sb.append(bowl.get(w)).append("\n");
             }
         }
-        bw.flush();
-        bw.close();
+        System.out.println(sb);
     }
 }
