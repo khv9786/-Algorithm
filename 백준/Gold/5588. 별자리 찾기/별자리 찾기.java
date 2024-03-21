@@ -1,76 +1,78 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-public class Main {
-    static class Pair {
-        int first, second;
 
-        public Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
+public class Main { // Boj_5588_별자리 찾기
+    static int m, n;
+    static HashSet<Data> stars = new HashSet<>(); // 별자리 저장
+    static List<Data> list = new ArrayList<>(); // 별자리 위치
+    static boolean chk = false;// 별자리 찾는 플래그
+
+    static public class Data {
+        int x;
+        int y;
+
+        public Data(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
-
-        // Implement equals and hashCode if you plan to use contains on a list of Pairs.
+        // HashSet 객체 비교 오버라이드
         @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Pair pair = (Pair) o;
-            return first == pair.first && second == pair.second;
+        public int hashCode() {
+            return (1000000 + 1) * y + x;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            Data data = (Data) obj;
+            return x == data.x && y == data.y;
         }
     }
 
-    static int cmp(Pair a, Pair b) {
-        if (a.first == b.first) {
-            return Integer.compare(b.second, a.second); // Note the order for descending
-        }
-        return Integer.compare(a.first, b.first);
-    }
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = null;
 
-        int n = Integer.parseInt(br.readLine());
-        List<Pair> a = new ArrayList<>();
+        m = Integer.parseInt(br.readLine()); // 찾는 별자리
+        int x, y;
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+            x = Integer.parseInt(st.nextToken());
+            y = Integer.parseInt(st.nextToken());
+            list.add(new Data(x, y));
+        }
 
+        n = Integer.parseInt(br.readLine()); // 별자리 맵
         for (int i = 0; i < n; i++) {
-            String[] input = br.readLine().split(" ");
-            a.add(new Pair(Integer.parseInt(input[0]), Integer.parseInt(input[1])));
+            st = new StringTokenizer(br.readLine());
+            x = Integer.parseInt(st.nextToken());
+            y = Integer.parseInt(st.nextToken());
+            stars.add(new Data(x, y)); //해시에 저장
         }
 
-        a.sort(Main::cmp);
+        Data start = list.get(0); // 기준 점
+        int lineX = 0, lineY = 0;
 
-        int m = Integer.parseInt(br.readLine());
-        List<Pair> b = new ArrayList<>();
-
-        for (int i = 0; i < m; i++) {
-            String[] input = br.readLine().split(" ");
-            b.add(new Pair(Integer.parseInt(input[0]), Integer.parseInt(input[1])));
+        // 전체 순환
+        for (Data data : stars) {
+            if (chk) break; // 찾았다면 종료
+            lineX = data.x - start.x;
+            lineY = data.y - start.y;
+            sol(lineX, lineY); // 이동 거리로 별자리 존재하는지
         }
+        System.out.println(lineX + " " + lineY);
+    }
 
-        b.sort(Comparator.comparingInt((Pair p) -> p.first).thenComparingInt(p -> p.second));
-
-        int x = a.get(0).first;
-        int y = a.get(0).second;
-
-        for (int i = 0; i < m; i++) {
-            int dx = b.get(i).first - x, dy = b.get(i).second - y;
-            boolean flag = false;
-            for (Pair pair : a) {
-                Pair shifted = new Pair(pair.first + dx, pair.second + dy);
-                if (!b.contains(shifted)) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
-                bw.write(dx + " " + dy + "\n");
-                bw.flush();
+    private static void sol(int line1, int line2) {
+        for (int i = 1; i < m; i++) {
+            Data data = list.get(i);
+            // 정한 x,y 좌표 거리 이동하면 존재하는지 확인
+            if (!stars.contains(new Data(data.x + line1, data.y + line2))) {
                 return;
             }
         }
+        // 플래그 on => 찾음
+        chk = true;
 
-        bw.close();
     }
 }
