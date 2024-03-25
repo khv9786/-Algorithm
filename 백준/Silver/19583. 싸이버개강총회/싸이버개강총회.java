@@ -14,23 +14,21 @@ public class Main { // Boj_19583_싸이버개강총회
         int s_time = Time(s);
         int e_time = Time(e);
         int f_time = Time(f);
-
-        HashSet<String> before = new HashSet<>();
-        HashSet<String> after = new HashSet<>();
+        int answer = 0;
+        HashSet<String> set = new HashSet<>();
         String line;
         while ((line = br.readLine()) != null && !line.isEmpty()) {
             st = new StringTokenizer(line);
-                int time = Time(st.nextToken());
-                String name = st.nextToken();
-                if (time <= s_time) {
-                    before.add(name);
-                } else if (e_time <= time && time <= f_time) {
-                    if (before.contains(name)) {
-                        after.add(name);
-                    }
+            int time = Time(st.nextToken());
+            String name = st.nextToken();
+            if (time <= s_time) { // 개강총회 시작 전 채팅 참여자
+                set.add(name);
+            } else if (e_time <= time && time <= f_time && set.contains(name)) { // 개강총회 종료 후 채팅
+                answer++;
+                set.remove(name); // 중복 방지
             }
         }
-        System.out.println(after.size());
+        System.out.println(answer);
     }
 
     public static int Time(String s) {
