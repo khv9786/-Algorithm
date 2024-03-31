@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.*;
-// Prg_가장 먼 노드
-class Solution {
-public int solution(int n, int[][] edge) {
+
+public class Solution { // Prg_가장 먼 노드
+    public static int solution(int n, int[][] edge) {
         int answer = 0;
         boolean[][] arr = new boolean[n + 1][n + 1];
         int [] visit = new int[n + 1];
@@ -23,14 +23,19 @@ public int solution(int n, int[][] edge) {
         while (!que.isEmpty()) {
             int now = que.poll();
 
-            for (int i = 0; i < n; i++) {
-                if (visit[i] != 0)
+            for (int i = 0; i <= n; i++) {
+                if (visit[i] != 0 || !arr[now][i])
                     continue;
                 que.add(i);
                 visit[i] = visit[now] + 1;
                 distance = visit[i];
             }
         }
+//        System.out.println("distance = " + distance);
+//        for(int i = 1; i<=n; i++){
+//            int s = visit[i];
+//            System.out.println(i+" visit = " + s);
+//        }
 
         for(int i =0; i<visit.length; i++){
            if(distance == visit[i]){
@@ -39,5 +44,16 @@ public int solution(int n, int[][] edge) {
         }
 
         return answer;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = 6;
+        int [][] vertex = {{3,6},{4,3},{3,2},{1,3},{1,2},{2,4},{5,2}};
+
+        System.out.println(solution(N,vertex));
+
+
     }
 }
