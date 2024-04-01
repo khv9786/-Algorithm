@@ -16,16 +16,17 @@ public class Main { //  Boj_11725_트리의 부모 찾기
             StringTokenizer st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            
+
             tree.computeIfAbsent(a, k -> new ArrayList<>()).add(b);
             tree.computeIfAbsent(b, k -> new ArrayList<>()).add(a);
         }
 
         dfs(1, 0);
-
+        StringBuilder sb = new StringBuilder();
         for (int i = 2; i <= N; i++) {
-            System.out.println(parents[i]);
+            sb.append(parents[i]).append("\n");
         }
+        System.out.println(sb);
     }
     public static void dfs(int current, int parent) {
         parents[current] = parent;
