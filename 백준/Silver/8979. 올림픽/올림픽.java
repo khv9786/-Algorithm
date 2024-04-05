@@ -7,7 +7,7 @@ public class Main { // Boj_8979_올림픽
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        int[][] arr = new int[N][4];
+        int[][] arr = new int[N + 1][4];
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -17,7 +17,6 @@ public class Main { // Boj_8979_올림픽
                 arr[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-
         Arrays.sort(arr, new Comparator<int[]>() { // 금은동 정렬
             @Override
             public int compare(int[] o1, int[] o2) {
@@ -31,11 +30,15 @@ public class Main { // Boj_8979_올림픽
             }
         });
 
-        int rank = 1;
-        for (int i = 1; i < N; i++) {
-            if (arr[i-1][1] != arr[i][1] || arr[i-1][2] != arr[i][2] || arr[i-1][3] != arr[i][3]) {
-                rank = i + 1; // 동일한경우
+        int cnt = 1;
+        int rank = 0;
+        for (int i = 0; i < N; i++) {
+            if (arr[i + 1][1] != arr[i][1] || arr[i + 1][2] != arr[i][2] || arr[i + 1][3] != arr[i][3]) {
+                rank += cnt; // 겹치지 않는다면
+            } else {// 동일하다면
+                cnt++;
             }
+//            System.out.println(arr[i][0] + "번의 등수 :" + rank);
             if (arr[i][0] == K) {
                 System.out.println(rank);
                 break;
