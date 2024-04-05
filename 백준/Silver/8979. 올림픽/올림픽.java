@@ -30,15 +30,16 @@ public class Main { // Boj_8979_올림픽
             }
         });
 
+        int rank = 1;
         int cnt = 1;
-        int rank = 0;
         for (int i = 0; i < N; i++) {
-            if (arr[i + 1][1] != arr[i][1] || arr[i + 1][2] != arr[i][2] || arr[i + 1][3] != arr[i][3]) {
-                rank += cnt; // 겹치지 않는다면
-            } else {// 동일하다면
+            if (i > 0 && (arr[i][1] != arr[i-1][1] || arr[i][2] != arr[i-1][2] || arr[i][3] != arr[i-1][3])) {
+                rank += cnt;
+                cnt = 1;
+            } else if (i > 0) {
                 cnt++;
             }
-//            System.out.println(arr[i][0] + "번의 등수 :" + rank);
+
             if (arr[i][0] == K) {
                 System.out.println(rank);
                 break;
