@@ -40,16 +40,19 @@ public class Main {
     }
 
     public static void DFS(int x, int y) {
-        if (x < 0 || y < 0 || x >= N || y >= M || visited[x][y] || map[x][y] == 'X') {
-            return;
-        }
-
         visited[x][y] = true;
 
         if (map[x][y] == 'P') result++;
 
         for (int i = 0; i < 4; i++) {
-            DFS(x + dx[i], y + dy[i]);
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            if (nx >= 0 && ny >= 0 && nx < N && ny < M && !visited[nx][ny]) {
+                if (map[nx][ny] != 'X') {
+                    DFS(nx, ny);
+                }
+            }
         }
     }
 }
