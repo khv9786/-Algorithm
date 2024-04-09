@@ -1,5 +1,6 @@
 import java.io.*;
-import java.util.*;
+import java.nio.Buffer;
+import java.util.StringTokenizer;
 
 public class Main {
     static int N, M;
