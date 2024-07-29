@@ -1,0 +1,3 @@
+-- 테이블 COUNT 함수 사용, ID 개수
+SELECT COUNT(ANIMAL_ID)
+FROM ANIMAL_INS;
