@@ -1,0 +1,13 @@
+-- 중복된 이름, 횟수를 조회 NULL 제외, 이름순으로 정렬
+-- COUNT(*)은 행을 세는 함수
+-- HAVING 으로 그룹에 조건주기.
+
+SELECT 
+NAME, COUNT(*) AS 'COUNT'
+
+FROM ANIMAL_INS
+
+WHERE NAME IS NOT NULL
+GROUP BY NAME
+HAVING COUNT(*) >= 2
+ORDER BY NAME;
