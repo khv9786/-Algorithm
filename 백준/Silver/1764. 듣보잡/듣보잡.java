@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main { // S4 1764 듣보잡
+public class Main { // 1764 듣보잡 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -11,29 +11,26 @@ public class Main { // S4 1764 듣보잡
         int M = Integer.parseInt(st.nextToken());
 
         HashSet<String> neverSeen = new HashSet<>();
-        HashSet<String> neverHeard = new HashSet<>();
+        List<String> names = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
-            String name = br.readLine();
-            neverSeen.add(name);
+            neverSeen.add(br.readLine());
         }
 
         for (int j = 0; j < M; j++) {
             String name = br.readLine();
-            neverHeard.add(name);
+            if (neverSeen.contains(name)) {
+                names.add(name);
+            }
         }
 
-        neverSeen.retainAll(neverHeard);
-        List<String> answer = new ArrayList<>(neverSeen);
-        Collections.sort(answer);
+        Collections.sort(names);
 
-        sb.append(answer.size());
-        sb.append('\n');
-        for (int i = 0; i < answer.size(); i++) {
-            sb.append(answer.get(i));
-            sb.append('\n');
+        sb.append(names.size()).append('\n');
+        for (String name : names) {
+            sb.append(name).append('\n');
         }
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
