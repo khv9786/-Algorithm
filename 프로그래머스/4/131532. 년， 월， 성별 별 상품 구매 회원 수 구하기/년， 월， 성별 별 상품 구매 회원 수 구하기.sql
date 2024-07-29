@@ -1,0 +1,26 @@
+-- 년, 월, 성별 별로 카테고리화 하고 정렬할것.
+-- YEAR과 MONTH 열 그룹화, DATE에서 YEAR이랑 MONTH만 가져올것
+-- USER_ID 로 JOIN
+-- SALE 과 INFO 별칭 S와 I로 통일
+-- 구매한 회원 수 이므로 DISTINCT USER_ID에 적용
+-- 성별 조건 필요 IS NOT NULL + GROUP BY 사용
+
+SELECT
+    YEAR(S.SALES_DATE) AS YEAR,
+    MONTH(S.SALES_DATE) AS MONTH,
+    I.GENDER,
+    COUNT(DISTINCT S.USER_ID) AS USERS
+FROM
+    ONLINE_SALE S
+JOIN
+    USER_INFO I ON S.USER_ID = I.USER_ID
+WHERE
+    I.GENDER IS NOT NULL 
+GROUP BY
+    YEAR(S.SALES_DATE), 
+    MONTH(S.SALES_DATE), 
+    I.GENDER
+ORDER BY
+    YEAR, 
+    MONTH, 
+    I.GENDER;
