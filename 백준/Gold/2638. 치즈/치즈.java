@@ -32,9 +32,10 @@ public class Main { // G3 치즈
 
         while (cheeseCnt != 0) {
             // 외부 공기 체크
-            outsideAir(0, 0);
-            bfs(0, 0);
+            visited = new boolean[N][M];
+            init(0, 0);
 //            showmetheMap();
+            bfs(0, 0);
             time++;
         }
 
@@ -127,5 +128,22 @@ public class Main { // G3 치즈
             System.out.println();
         }
         System.out.println();
+    }
+
+
+    static void init(int x, int y){
+        visited[x][y] = true;
+        cheese[x][y] = 2;
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dr[i];
+            int newY = y + dc[i];
+            if(initCheck(newX, newY)) {
+                init(newX, newY);
+            }
+        }
+    }
+
+    static boolean initCheck(int x, int y){
+        return rangeChk(x,y) && cheese[x][y] != 1;
     }
 }
