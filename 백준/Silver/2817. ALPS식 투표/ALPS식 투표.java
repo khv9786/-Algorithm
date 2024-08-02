@@ -25,7 +25,6 @@ public class Main { // S3 ALPS식 투표
             for(int j = 1; j<= 14; j++){
                 scores[j-1] = votes/j;
             }
-            scores = Arrays.stream(scores).sorted().toArray();
             playersList.add(new Player(name, votes, scores, 0));
         }
 
