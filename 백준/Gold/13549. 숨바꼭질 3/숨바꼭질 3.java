@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Main { // G5 숨바꼭질3
 
     public static int N, M;
 
