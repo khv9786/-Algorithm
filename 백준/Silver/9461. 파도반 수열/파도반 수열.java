@@ -15,8 +15,7 @@ public class Main {// S3 파도반 수열
             arr[k] = Integer.parseInt(br.readLine());
         }
 
-        long maxNum = Arrays.stream(arr).max().getAsLong();
-        long[] dp = new long[(int)Math.max(maxNum, 6) + 1];
+        long[] dp = new long[101];
         // 1 1 1 2 2 3 4 5 7 9 12 16 21 28 37 48 ...
         dp[0] = 0;
         dp[1] = 1;
@@ -28,7 +27,7 @@ public class Main {// S3 파도반 수열
         // 1,3 / 4 / 5,1 / 6,2 / 7,3 / 8,4/ 9,5/
         // 10, 6 짝궁 / 11이랑 7이랑 짝궁 / 12이랑 8이랑 짝궁 /
 
-        for (int i = 7; i <= maxNum; i++) {
+        for (int i = 7; i <= 100; i++) {
             dp[i] = dp[i - 1] + dp[i - 5];
         }
 
