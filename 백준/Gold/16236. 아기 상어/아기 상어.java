@@ -5,8 +5,8 @@ public class Main {
     public static int N;
     public static int[][] map;
     public static Shark babyShark;
-    public static int[] dr = {-1, 0, 0, 1}; // 상좌우하 이동
-    public static int[] dc = {0, -1, 1, 0};
+    public static int[] dr = {-1, 1, 0, 0}; // 상하좌우 이동
+    public static int[] dc = {0, 0, -1, 1};
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,11 +30,9 @@ public class Main {
         int time = 0;
         while (true) {
             Fish target = findYummyFish();
-            if (target == null) {
-                break;
-            }
+            if (target == null) break;
 
-            int distance = calDistance(target.r, target.c);
+            int distance = target.distance;
             time += distance;
             babyShark.r = target.r;
             babyShark.c = target.c;
@@ -50,59 +48,20 @@ public class Main {
     }
 
     public static Fish findYummyFish() {
-        Queue<int[]> queue = new ArrayDeque<>();
-        boolean[][] visited = new boolean[N][N];
-        queue.add(new int[]{babyShark.r, babyShark.c, 0});
-        visited[babyShark.r][babyShark.c] = true;
-        List<Fish> fishList = new ArrayList<>();
-
-        while (!queue.isEmpty()) {
-            int[] cur = queue.poll();
-            int r = cur[0], c = cur[1], dist = cur[2];
-
-            for (int i = 0; i < 4; i++) {
-                int nr = r + dr[i];
-                int nc = c + dc[i];
-
-                if (rangeChk(nr, nc, visited)) {
-                    if (map[nr][nc] <= babyShark.size) { // 이동 가능
-                        visited[nr][nc] = true;
-                        queue.add(new int[]{nr, nc, dist + 1});
-                        // 먹을 수 있는 물고기면 리스트에 추가
-                        if (map[nr][nc] > 0 && map[nr][nc] < babyShark.size) {
-                            fishList.add(new Fish(nr, nc, map[nr][nc], dist + 1));
-                        }
-                    }
-                }
-            }
-        }
-
-        if (fishList.isEmpty()) {
-            return null;
-        }
-
-        fishList.sort((f1, f2) -> {
-            if (f1.distance != f2.distance) return f1.distance - f2.distance;
-            if (f1.r != f2.r) return f1.r - f2.r;
-            return f1.c - f2.c;
-        });
-
-        return fishList.get(0);
-    }
-
-    public static int calDistance(int targetR, int targetC) {
         Queue<int[]> queue = new LinkedList<>();
         boolean[][] visited = new boolean[N][N];
         queue.add(new int[]{babyShark.r, babyShark.c, 0});
         visited[babyShark.r][babyShark.c] = true;
 
+        PriorityQueue<Fish> fishQueue = new PriorityQueue<>((f1, f2) -> {
+            if (f1.distance != f2.distance) return f1.distance - f2.distance;
+            if (f1.r != f2.r) return f1.r - f2.r;
+            return f1.c - f2.c;
+        });
+
         while (!queue.isEmpty()) {
             int[] cur = queue.poll();
             int r = cur[0], c = cur[1], dist = cur[2];
-
-            if (r == targetR && c == targetC) {
-                return dist;
-            }
 
             for (int i = 0; i < 4; i++) {
                 int nr = r + dr[i];
@@ -112,15 +71,19 @@ public class Main {
                     if (map[nr][nc] <= babyShark.size) { // 이동 가능
                         visited[nr][nc] = true;
                         queue.add(new int[]{nr, nc, dist + 1});
+                        if (map[nr][nc] > 0 && map[nr][nc] < babyShark.size) {
+                            fishQueue.add(new Fish(nr, nc, map[nr][nc], dist + 1));
+                        }
                     }
                 }
             }
         }
 
-        return -1;
-    }
-    public static boolean rangeChk(int r, int c, boolean[][] visited) {
-        return r >= 0 && r < N && c >= 0 && c < N && !visited[r][c];
+        if (fishQueue.isEmpty()) {
+            return null;
+        }
+
+        return fishQueue.poll();
     }
 
     public static class Fish {
