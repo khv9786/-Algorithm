@@ -8,60 +8,47 @@ public class Main { // AC
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-
         T = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < T; i++) {
-            boolean position = true; // true == 정방향, false 역방향
+            boolean position = false; // false == 정방향, true == 역방향
             boolean error = false;
             String cmd = br.readLine();
             int N = Integer.parseInt(br.readLine());
-            Deque<Integer> doubleQ = new ArrayDeque<>();
+            Deque<Integer> deque = new ArrayDeque<>();
+
             st = new StringTokenizer(br.readLine(), ",[]");
             while (st.hasMoreTokens()) {
-                doubleQ.offer(Integer.parseInt(st.nextToken()));
+                deque.offer(Integer.parseInt(st.nextToken()));
             }
 
-            for(int k = 0; k < cmd.length(); k++) {
-                if(cmd.charAt(k) == 'R') {
+            for (char c : cmd.toCharArray()) {
+                if (c == 'R') {
                     position = !position;
-                } else if(cmd.charAt(k) == 'D') {
-                    if(doubleQ.isEmpty()) {
-                        sb.append("error").append("\n");
+                } else if (c == 'D') {
+                    if (deque.isEmpty()) {
+                        sb.append("error\n");
                         error = true;
                         break;
                     }
-                    if(position) { // 정방향
-                        doubleQ.pop();
-                    } else { // 역방향
-                        doubleQ.pollLast();
+                    if (position) {
+                        deque.pollLast();
+                    } else {
+                        deque.pollFirst();
                     }
                 }
             }
 
-            if(error) {
-                continue;
-            }
-
-            sb.append("[");
-            if(position) { // 정방향
-                while(!doubleQ.isEmpty()) {
-                    int temp = doubleQ.poll();
-                    sb.append(temp);
-                    if(!doubleQ.isEmpty()) {
+            if (!error) {
+                sb.append("[");
+                while (!deque.isEmpty()) {
+                    sb.append(position ? deque.pollLast() : deque.pollFirst());
+                    if (!deque.isEmpty()) {
                         sb.append(",");
                     }
                 }
-            } else { // 역방향
-                while(!doubleQ.isEmpty()) {
-                    int temp = doubleQ.pollLast();
-                    sb.append(temp);
-                    if(!doubleQ.isEmpty()) {
-                        sb.append(",");
-                    }
-                }
+                sb.append("]\n");
             }
-            sb.append("]").append("\n");
         }
 
         System.out.print(sb.toString());
