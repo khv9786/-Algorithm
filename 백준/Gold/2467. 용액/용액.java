@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main { // 다각형의 면적
+public class Main { // 용액
     public static int N;
     public static StringBuilder sb = new StringBuilder();
 
@@ -12,7 +12,7 @@ public class Main { // 다각형의 면적
         int[] arr = new int[N];
         st = new StringTokenizer(br.readLine());
 
-        int positive = 0, negative = 0, zero = 0, min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
 
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
@@ -22,10 +22,8 @@ public class Main { // 다각형의 면적
 
         if (max <= 0) {
             sb.append(arr[N - 2]).append(" ").append(arr[N - 1]);
-//            System.out.println("음수만 있을때 ");
         } else if (min >= 0) {
             sb.append(arr[0]).append(" ").append(arr[1]);
-//            System.out.println("양수만 있을때 ");
         } else { // 이분 탐색으로 서칭
             int mid = 0;
             int now = 0;
