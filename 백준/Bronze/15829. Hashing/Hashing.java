@@ -8,13 +8,16 @@ public class Main {
 
         int N = Integer.parseInt(st.nextToken());
         String text = br.readLine();
-        int answer = 0;
+        long answer = 0;
+        long mod = 1234567891;
+        long pow = 1; 
 
         for (int i = 0; i < text.length(); i++) {
             char now = text.charAt(i);
             int hash = now - 'a' + 1;
-            int temp = (int) Math.pow(31, i);
-            answer += temp * hash;
+
+            answer = (answer + hash * pow) % mod; 
+            pow = (pow * 31) % mod;  
         }
 
         System.out.println(answer);
