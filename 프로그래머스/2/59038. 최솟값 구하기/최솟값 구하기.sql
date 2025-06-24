@@ -1,6 +1,4 @@
 -- DATETIME 컬럼에서 가장 빠른값을 찾아야 함.
 -- MIN 사용
 SELECT MIN(DATETIME)
-
-FROM
-ANIMAL_INS
+FROM ANIMAL_INS
