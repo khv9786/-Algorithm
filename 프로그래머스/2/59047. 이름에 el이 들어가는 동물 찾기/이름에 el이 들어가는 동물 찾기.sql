@@ -1,0 +1,6 @@
+-- 코드를 입력하세요
+-- NAME 에 "EL", 대소문자 구별 x , 강아지 여야 함
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE UPPER(NAME) LIKE '%EL%' AND ANIMAL_TYPE = 'Dog'
+ORDER BY NAME;
